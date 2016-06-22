@@ -3,30 +3,38 @@ title: "Growth Curve Report"
 author: "Randy L Coryell"
 date: "June 22, 2016"
 output: pdf_document
+toc: true
+toc_depth: 4
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+
+## Overview of Growth Study
+
+This report will highlight data aquired during a 8h growth study to "investigate the neutrality of *Tn7* antibiotic (CAM) neutral marker insertion in *Vibrio fischeri* 
+
+>###Strains:
+
+>>>>ES114
+
+>>>>ET401
+
+>>>>EM17
+
+>>*Note* All cultures were derived from a single colony, isolated on CAM plates (2.5ug/mL) and grown in liquid SWT (100mL) overnight. These overnight cultures were used to innoculate fresh SWT (100mL) media and grown at 225rpm and 28C for 1.5h. After taking a turbity measurement via spectrophotometry, each strain was diluted by placing a volume of this 1.5h culture into 100ml of fresh SWT. An initial OD was taken and the cultures were then placed into a shaking incubator @ 28C and 225RPM for the study.
+
+
+***
+> I want to walk down the street and have people say 'There goes Roy Hobbs, the best to ever play the game'.
+
+>> Robert Redford, The Natural
+
+***
+
+
+## Installation of R packages 
+Certain R packages, available on the CRAN repository, are required for this analysis.
+
+```{undefinedecho=FALSE}
+install.packages(c('reshape2', 'dplyr', 'ggplot2'))
+
 ```
-
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
-
-
