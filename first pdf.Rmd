@@ -3,7 +3,7 @@ title: "Growth Curve Report"
 author: "Randy L Coryell"
 date: "June 22, 2016"
 output: pdf_document
-toc: true
+toc: yes
 toc_depth: 4
 ---
 
@@ -36,5 +36,55 @@ Certain R packages, available on the CRAN repository, are required for this anal
 
 ```{undefinedecho=FALSE}
 install.packages(c('reshape2', 'dplyr', 'ggplot2'))
+
+```
+
+
+## Raw Data
+In order to generate growth curves from the raw data, it first must be recorded as a CSV file in MSEXCEL and then loaded into memory in R.
+
+``` {r  read the raw CSV file}
+rawdata <- read.csv("/Users/randycoryell/Growth Curve/Growth Curve/06212016_CAM_VS_NOCAMcurve.csv")
+
+print(rawdata)
+
+```
+
+
+## Tidy the data
+
+A reshaping of the data matrix is required in order to futher analyze the data set.
+
+
+```{r tidy the data}
+library(reshape2)
+
+reshaped <- melt(rawdata, id=c("Time", "Temp"), variable.name="Strain",
+value.name="OD600")
+```
+ 
+ Summary statistics can be called upon for the reshaped data
+
+``` {r  Summary Stats for reshaped data}
+summary(reshaped)
+```
+
+Now we need to take a quick look at the reshaped matrix to check for farmatting errors
+
+```{r  reshaped error check}
+head(reshaped)
+```
+
+When the data is replicated, there would need to be a nesting or grouping performed, this step would be useful for replicates in experimental evolution studies
+
+```{r group by strain, eval=FALSE, include=TRUE}
+grouped <- group_by(reshaped, Strain)
+
+```
+
+Sice these are single reads from the spectrophotometer, no confidence interval can be established, however an approximate growth curve can be produced.
+``` {r  growth curve from single observations, fig=TRUE}
+library(ggplot2)
+print(ggplot(data=reshaped, aes(x=Time/60, y=OD600, color=Strain)) + geom_line() + labs(x="Time (Hours)", y="Absorbance at 600 nm"))
 
 ```
